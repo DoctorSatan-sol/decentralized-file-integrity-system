@@ -1,0 +1,253 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "InvalidAddress",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "UnknownRegistry",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "registry",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "RegistryCreated",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "createRegistry",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "registryAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "offset",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "limit",
+						"type": "uint256"
+					}
+				],
+				"name": "getUserRegistriesPage",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "page",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isRegistry",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "onAccessGranted",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "onAccessRevoked",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "userRegistryCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"smart-contracts/FileIntegrityRegistryFactory.sol": "FileIntegrityRegistryFactory"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/utils/Arrays.sol": {
+			"keccak256": "0xb3b81029526a4c3acf39e57cc446407141ebce338cc99585942af1340e1a69e0",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3857ce97e8f7a51ad78ea5419b3386e18fcc8af73b65803eedd8193ab7abc9df",
+				"dweb:/ipfs/QmSQi6x2cYsUy76mfMNwuq151bVmh4kAND141kjume51Aq"
+			]
+		},
+		"@openzeppelin/contracts/utils/Comparators.sol": {
+			"keccak256": "0x302eecd8cf323b4690e3494a7d960b3cbce077032ab8ef655b323cdd136cec58",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://49ba706f1bc476d68fe6c1fad75517acea4e9e275be0989b548e292eb3a3eacd",
+				"dweb:/ipfs/QmeBpvcdGWzWMKTQESUCEhHgnEQYYATVwPxLMxa6vMT7jC"
+			]
+		},
+		"@openzeppelin/contracts/utils/Panic.sol": {
+			"keccak256": "0xf7fe324703a64fc51702311dc51562d5cb1497734f074e4f483bfb6717572d7a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c6a5ff4f9fd8649b7ee20800b7fa387d3465bd77cf20c2d1068cd5c98e1ed57a",
+				"dweb:/ipfs/QmVSaVJf9FXFhdYEYeCEfjMVHrxDh5qL4CGkxdMWpQCrqG"
+			]
+		},
+		"@openzeppelin/contracts/utils/SlotDerivation.sol": {
+			"keccak256": "0x94045fd4f268edf2b2d01ef119268548c320366d6f5294ad30c1b8f9d4f5225f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://edfda81f426f8948b3834115c21e83c48180e6db0d2a8cd2debb2185ed349337",
+				"dweb:/ipfs/QmdYZneFyDAux1BuWQxLAdqtABrGS2k9WYCa7C9dvpKkWv"
+			]
+		},
+		"@openzeppelin/contracts/utils/StorageSlot.sol": {
+			"keccak256": "0xcf74f855663ce2ae00ed8352666b7935f6cddea2932fdf2c3ecd30a9b1cd0e97",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://9f660b1f351b757dfe01438e59888f31f33ded3afcf5cb5b0d9bf9aa6f320a8b",
+				"dweb:/ipfs/QmarDJ5hZEgBtCmmrVzEZWjub9769eD686jmzb2XpSU1cM"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/Math.sol": {
+			"keccak256": "0x59973a93b1f983f94e10529f46ca46544a9fec2b5f56fb1390bbe9e0dc79f857",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c55ef8f0b9719790c2ae6f81d80a59ffb89f2f0abe6bc065585bd79edce058c5",
+				"dweb:/ipfs/QmNNmCbX9NjPXKqHJN8R1WC2rNeZSQrPZLd6FF6AKLyH5Y"
+			]
+		},
+		"@openzeppelin/contracts/utils/math/SafeCast.sol": {
+			"keccak256": "0xc8cae21c9ae4a46e5162ff9bf5b351d6fa6a6eba72d515f3bc1bdfeda7fdf083",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ce830ebcf28e31643caba318996db3763c36d52cd0f23798ba83c135355d45e9",
+				"dweb:/ipfs/QmdGPcvptHN7UBCbUYBbRX3hiRVRFLRwno8b4uga6uFNif"
+			]
+		},
+		"@openzeppelin/contracts/utils/structs/EnumerableSet.sol": {
+			"keccak256": "0x5c298e834696707e274a71a224969d36faecd928a8076603210d67d091adb4ae",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a93fe967b4d55b31157164cbb7e3e1ebaf3535fc1d3f8d0156da7abb9b565d90",
+				"dweb:/ipfs/QmXH7nyxwEUeMPFDDmkdUwqxLEcezaSmVyunyMAuck1WqR"
+			]
+		},
+		"smart-contracts/FileIntegrityRegistry.sol": {
+			"keccak256": "0x582ae0428bb77a27e60421b2801e7d78a11d0980f433786e2028ef1ba1b10e00",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://36252f7a019218a65dc0541365bbc047983c1c67acf2f2553de3c7dc7d348a42",
+				"dweb:/ipfs/QmUU7tbh1HVeGWzwPXFTtn5fk8y5dWXAikB8c1673zTpQj"
+			]
+		},
+		"smart-contracts/FileIntegrityRegistryFactory.sol": {
+			"keccak256": "0x978ac4b99a413898e49b54d28626af57b75ac167a05de95ee0ec88ffac6ece1d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f15a658244fdd4f363aaa86942e96a40814a2f4549527d673d0e199392b45079",
+				"dweb:/ipfs/QmdgLQ1iHhsMtND48Vpn1W3ExvHLnaEeMw42smV8dVi4CC"
+			]
+		}
+	},
+	"version": 1
+}

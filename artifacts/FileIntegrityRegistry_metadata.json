@@ -6,9 +6,80 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_storageOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_factory",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "AlreadyAuthorized",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "CannotRevokeOwnerAccess",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "DescriptionTooLong",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "EmptyCID",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "EmptyHash",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "EmptyName",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "FileDoesNotExist",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "InvalidAddress",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NameTooLong",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NoAccess",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "UserNotAuthorized",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "VersionDoesNotExist",
+				"type": "error"
 			},
 			{
 				"anonymous": false,
@@ -215,6 +286,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "factory",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -397,11 +481,11 @@
 	},
 	"sources": {
 		"smart-contracts/FileIntegrityRegistry.sol": {
-			"keccak256": "0x2187e436926746d05e32801835482dd61d149e34bee343b9d0c55fd1c1ff3c52",
+			"keccak256": "0x582ae0428bb77a27e60421b2801e7d78a11d0980f433786e2028ef1ba1b10e00",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bacbc22c875d8abf81aa06bcc13fbe78a7d84b5eb9142b60a6cbaf97639b885e",
-				"dweb:/ipfs/Qma29GEsBT8TCWhToy7mQK79XFUwavfBZUyWN7CSzdhFv2"
+				"bzz-raw://36252f7a019218a65dc0541365bbc047983c1c67acf2f2553de3c7dc7d348a42",
+				"dweb:/ipfs/QmUU7tbh1HVeGWzwPXFTtn5fk8y5dWXAikB8c1673zTpQj"
 			]
 		}
 	},

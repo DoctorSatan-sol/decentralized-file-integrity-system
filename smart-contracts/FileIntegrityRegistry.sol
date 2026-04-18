@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity 0.8.34;
+
+interface IFileIntegrityRegistryFactory {
+    function onAccessGranted(address user) external;
+    function onAccessRevoked(address user) external;
+}
 
 struct FileVersion {
     bytes32 fileHash;
@@ -20,6 +24,18 @@ struct File {
 }
 
 contract FileIntegrityRegistry {
+    error NoAccess();
+    error InvalidAddress();
+    error AlreadyAuthorized();
+    error UserNotAuthorized();
+    error CannotRevokeOwnerAccess();
+    error EmptyName();
+    error EmptyCID();
+    error EmptyHash();
+    error NameTooLong();
+    error DescriptionTooLong();
+    error FileDoesNotExist();
+    error VersionDoesNotExist();
 
     event EditorAccessGranted(address indexed user);
     event EditorAccessRevoked(address indexed user);
@@ -45,47 +61,65 @@ contract FileIntegrityRegistry {
     );
 
     address public immutable storageOwner;
+    address public immutable factory;
     uint256 public nextFileId = 1;
 
-    constructor () {
-        storageOwner = msg.sender;
-        authorizedUsers[msg.sender] = true;
+    mapping(uint256 => File) private files;
+    mapping(uint256 => mapping(uint256 => FileVersion)) private fileVersions;
+    mapping(address => bool) public authorizedUsers;
+
+    constructor(address _storageOwner, address _factory) {
+        if (_storageOwner == address(0) || _factory == address(0)) revert InvalidAddress();
+
+        storageOwner = _storageOwner;
+        factory = _factory;
+        authorizedUsers[_storageOwner] = true;
     }
 
-    mapping (uint256 => File) private files;
-    mapping (uint256 => mapping (uint256 => FileVersion)) private fileVersions;
-    mapping (address => bool) public authorizedUsers;
+    modifier onlyOwner() {
+        if (msg.sender != storageOwner) revert NoAccess();
+        _;
+    }
 
-    function grantEditorAccess(address user) external {
-        require(msg.sender == storageOwner, "No access");
-        require(user != address(0), "Invalid address");
-        require(!authorizedUsers[user], "Already authorized");
+    modifier onlyAuthorized() {
+        if (!authorizedUsers[msg.sender]) revert NoAccess();
+        _;
+    }
+
+    function grantEditorAccess(address user) external onlyOwner {
+        if (user == address(0)) revert InvalidAddress();
+        if (authorizedUsers[user]) revert AlreadyAuthorized();
+
         authorizedUsers[user] = true;
+
+        IFileIntegrityRegistryFactory(factory).onAccessGranted(user);
 
         emit EditorAccessGranted(user);
     }
 
-    function revokeEditorAccess(address user) external {
-        require(msg.sender == storageOwner, "No access");
-        require(user != storageOwner, "Cannot revoke owner access");
-        require(authorizedUsers[user], "User not authorized");
+    function revokeEditorAccess(address user) external onlyOwner {
+        if (user == storageOwner) revert CannotRevokeOwnerAccess();
+        if (!authorizedUsers[user]) revert UserNotAuthorized();
+
         authorizedUsers[user] = false;
+
+        IFileIntegrityRegistryFactory(factory).onAccessRevoked(user);
 
         emit EditorAccessRevoked(user);
     }
 
     function createFile(
-        string memory _name, 
-        string memory _description, 
-        uint256 _size, bytes32 _fileHash, 
+        string memory _name,
+        string memory _description,
+        uint256 _size,
+        bytes32 _fileHash,
         string memory _cid
-    ) external {
-        require(authorizedUsers[msg.sender], "No access");
-        require(bytes(_name).length > 0, "Empty name");
-        require(bytes(_cid).length > 0, "Empty CID");
-        require(_fileHash != bytes32(0), "Empty hash");
-        require(bytes(_name).length <= 200, "Name too long");
-        require(bytes(_description).length <= 1000, "Description too long");
+    ) external onlyAuthorized {
+        if (bytes(_name).length == 0) revert EmptyName();
+        if (bytes(_cid).length == 0) revert EmptyCID();
+        if (_fileHash == bytes32(0)) revert EmptyHash();
+        if (bytes(_name).length > 200) revert NameTooLong();
+        if (bytes(_description).length > 1000) revert DescriptionTooLong();
 
         uint256 fileId = nextFileId;
         uint256 versionNumber = 1;
@@ -120,17 +154,16 @@ contract FileIntegrityRegistry {
             _cid
         );
     }
-    
+
     function addFileVersion(
         uint256 _fileId,
         uint256 _size,
         bytes32 _fileHash,
         string memory _cid
-    ) external {
-        require(authorizedUsers[msg.sender], "No access");
-        require(files[_fileId].exists, "File does not exist");
-        require(bytes(_cid).length > 0, "Empty CID");
-        require(_fileHash != bytes32(0), "Empty hash");
+    ) external onlyAuthorized {
+        if (!files[_fileId].exists) revert FileDoesNotExist();
+        if (bytes(_cid).length == 0) revert EmptyCID();
+        if (_fileHash == bytes32(0)) revert EmptyHash();
 
         uint256 newVersion = files[_fileId].latestVersionNumber + 1;
 
@@ -155,13 +188,19 @@ contract FileIntegrityRegistry {
     }
 
     function getFile(uint256 _fileId) external view returns (File memory) {
-        require(files[_fileId].exists, "File does not exist");
+        if (!files[_fileId].exists) revert FileDoesNotExist();
         return files[_fileId];
     }
 
-    function getFileVersion(uint256 _fileId, uint256 _versionNumber) external view returns (FileVersion memory) {
-        require(files[_fileId].exists, "File does not exist");
-        require(_versionNumber > 0 && _versionNumber <= files[_fileId].latestVersionNumber, "Version does not exist");
+    function getFileVersion(
+        uint256 _fileId,
+        uint256 _versionNumber
+    ) external view returns (FileVersion memory) {
+        if (!files[_fileId].exists) revert FileDoesNotExist();
+        if (_versionNumber == 0 || _versionNumber > files[_fileId].latestVersionNumber) {
+            revert VersionDoesNotExist();
+        }
+
         return fileVersions[_fileId][_versionNumber];
     }
 }

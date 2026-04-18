@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.34+commit.80d5c536"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "onAccessGranted",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "onAccessRevoked",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"smart-contracts/FileIntegrityRegistry.sol": "IFileIntegrityRegistryFactory"
+		},
+		"evmVersion": "osaka",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"smart-contracts/FileIntegrityRegistry.sol": {
+			"keccak256": "0x582ae0428bb77a27e60421b2801e7d78a11d0980f433786e2028ef1ba1b10e00",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://36252f7a019218a65dc0541365bbc047983c1c67acf2f2553de3c7dc7d348a42",
+				"dweb:/ipfs/QmUU7tbh1HVeGWzwPXFTtn5fk8y5dWXAikB8c1673zTpQj"
+			]
+		}
+	},
+	"version": 1
+}
