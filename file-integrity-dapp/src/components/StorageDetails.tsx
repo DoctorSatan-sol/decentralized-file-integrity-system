@@ -2,6 +2,9 @@
 
 import { useReadContract } from 'wagmi'
 import { registryAbi } from '@/lib/contracts'
+import AddFileModal from './AddFileModal'
+import StorageFilesSection from './StorageFilesSection'
+import AccessManagementModal from './AccessManagementModal'
 
 type Props = {
     address: string
@@ -85,6 +88,12 @@ export default function StorageDetails({ address }: Props) {
                     <p className="info-card-value">{filesCount}</p>
                 </div>
             </div>
+
+            <div className="storage-actions">
+                <AddFileModal address={address} />
+                <AccessManagementModal storageAddress={address as `0x${string}`} />
+            </div>
+            <StorageFilesSection address={address} />
         </section>
     )
 }

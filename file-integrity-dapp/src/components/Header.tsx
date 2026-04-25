@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import SettingsModal from './SettingsModal'
 
 export default function Header() {
     return (
@@ -11,7 +12,10 @@ export default function Header() {
                     File Integrity
                 </Link>
 
-                <ConnectButton />
+                <div className="header-actions">
+                    <SettingsModal />
+                    <ConnectButton chainStatus="full" />
+                </div>
             </div>
         </header>
     )
