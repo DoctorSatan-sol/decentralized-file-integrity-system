@@ -22,7 +22,7 @@ type FileVersionStruct = {
     userAddress: string
 }
 
-const IPFS_GATEWAY_BASE = 'https://ipfs.io/ipfs/'
+const IPFS_GATEWAY_BASE = 'https://ipfs.4everland.io/ipfs/'
 
 export default function FileViewModal({
                                           address,

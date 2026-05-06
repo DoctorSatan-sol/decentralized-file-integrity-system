@@ -46,7 +46,7 @@ type IntegrityResult = {
     }
 }
 
-const IPFS_GATEWAY_BASE = 'https://ipfs.io/ipfs/'
+const IPFS_GATEWAY_BASE = 'https://ipfs.4everland.io/ipfs/'
 
 function bytesToHex(bytes: Uint8Array) {
     return Array.from(bytes)
